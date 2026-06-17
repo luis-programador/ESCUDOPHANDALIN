@@ -1,0 +1,1555 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Escudo do Mestre - Edição de Ouro Definitiva</title>
+    <style>
+        body { background-color: #1a1a1a; color: #e0e0e0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; margin: 0; padding: 15px; }
+        h1, h2, h3 { color: #ffcc00; border-bottom: 2px solid #ffcc00; padding-bottom: 5px; margin-top: 5px; text-shadow: 1px 1px 2px #000; }
+        .escudo-container { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px; }
+        .painel { background-color: #2a2a2a; border: 2px solid #ffcc00; border-radius: 8px; padding: 15px; box-shadow: 0px 0px 10px rgba(255, 204, 0, 0.15); }
+        .lista-combate { margin: 10px 0; padding-left: 20px; line-height: 1.6; }
+        .lista-combate strong { color: #ffcc00; }
+        .imagem-mapa { max-width: 100%; height: auto; border-radius: 5px; margin-top: 15px; border: 2px solid #ffcc00; }
+        .titulo-parte { color: #f1c40f; border-bottom: 1px solid #f1c40f; font-size: 1.1em; margin-top: 20px; margin-bottom: 10px; font-weight: bold; }
+        .btn-local, .btn-bestiario { background-color: #333; color: #ffcc00; border: 1px solid #ffcc00; padding: 12px; width: 100%; text-align: left; font-size: 15px; font-weight: bold; border-radius: 5px; cursor: pointer; margin-top: 8px; transition: 0.3s; }
+        .btn-bestiario { background-color: #5a0000; }
+        .btn-local:hover, .btn-bestiario:hover { background-color: #ffcc00; color: #000; }
+        .conteudo-local { display: none; grid-template-columns: repeat(auto-fit, minmax(90px, 1fr)); gap: 15px; background-color: #222; padding: 15px; border-radius: 0 0 5px 5px; border: 1px solid #ffcc00; border-top: none; }
+        .personagem-card { text-align: center; font-size: 0.85em; line-height: 1.3; cursor: pointer; padding: 8px; border-radius: 8px; border: 1px solid transparent; transition: 0.3s; }
+        .personagem-card:hover { background-color: #333; border: 1px solid #ffcc00; }
+        .personagem-card img { width: 70px; height: 70px; object-fit: cover; border-radius: 50%; border: 2px solid #ffcc00; margin-bottom: 5px; transition: 0.3s; }
+        .personagem-card.ativo { grid-column: 1 / -1; background-color: #111; border: 1px solid #ffcc00; box-shadow: inset 0px 0px 10px #000; }
+        .personagem-card.ativo img { width: 90px; height: 90px; }
+        .ficha-npc { display: none; width: 100%; text-align: left; margin-top: 10px; padding-top: 10px; border-top: 1px dashed #ffcc00; font-size: 1.05em; color: #ccc; }
+        .personagem-card.ativo .ficha-npc { display: block; }
+        .conteudo-bestiario { display: none; flex-direction: column; gap: 5px; background-color: #111; padding: 15px; border-radius: 0 0 5px 5px; border: 1px solid #ffcc00; border-top: none; font-size: 0.9em; line-height: 1.4; }
+        .ficha-hr { border: 0; border-bottom: 1px dashed #ffcc00; margin: 8px 0; }
+        .ficha-destaque { color: #ffcc00; font-weight: bold; }
+        .filtros-bestiario { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 15px; }
+        .btn-filtro { background-color: #222; color: #ccc; border: 1px solid #555; padding: 6px 12px; border-radius: 4px; cursor: pointer; font-size: 0.85em; transition: 0.2s; }
+        .btn-filtro:hover { background-color: #444; color: #fff; }
+        .btn-filtro.ativo { background-color: #ffcc00; color: #000; border-color: #ffcc00; font-weight: bold; }    
+    </style>
+</head>
+<body>
+
+    <h1 style="text-align: center;">🏆 Escudo do Mestre: Phandelver</h1>
+
+    <div class="escudo-container">
+
+        <div class="painel">
+            <h2>⚔️ Ações de Combate</h2>
+            <ul class="lista-combate">
+                <li><strong>Ação:</strong> Atacar, Lançar Magia, Correr, Desengajar, Esquivar, Ajudar, Esconder, Procurar, Preparar.</li>
+                <li><strong>Ação Bônus:</strong> Magias rápidas, Ataque com segunda arma.</li>
+                <li><strong>Reação:</strong> Ataque de Oportunidade, Escudo Arcano.</li>
+            </ul>
+            
+            <h3>🗺️ Mapa da Região</h3>
+            <img src="Mapas/cap1/NorthSwordCoast-(ZF-1513-85707-1-006).jpg" alt="Mapa da Aventura" class="imagem-mapa">
+        </div>
+        <div class="painel">
+            <h2>📍 Lugares & NPCs</h2>
+            
+            <div class="titulo-parte">🟡 Parte 1: Flecha Goblin</div>
+            
+           
+            <button class="btn-local" onclick="abrirLocal('trilha')">🌲 Emboscada Goblin</button>
+            <div id="trilha" class="conteudo-local">
+                
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #e74c3c; border-radius: 4px; font-size: 0.9em; margin-bottom: 10px;">
+                    <strong style="color: #e74c3c;">🏹 O Cenário</strong>
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #ccc;">
+                        "Cerca de dez metros à frente, dois cavalos mortos bloqueiam o caminho. Cada um tem várias flechas de hastes negras espetadas nos flancos. Os bosques ao redor da trilha são densos..."
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-goblin" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Goblin.png" alt="Goblins">
+                    <br><strong>Goblins (x4) ⚔️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Tática:</span> Usam <em>Fuga Ágil</em> para se esconder. Se 2 morrerem, os outros fogem.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O que sabem:</span> Obedecem a Klarg no Esconderijo Dentefino. Capturaram Gundren e Sildar.</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('dentefino')">🦇 Esconderijo Dentefino (Completo)</button>
+            <div id="dentefino" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #111; padding: 10px; border-left: 4px solid #fff; border-radius: 4px; font-size: 0.9em; margin-bottom: 15px;">
+                    <strong style="color: #fff;">ℹ️ Características Gerais da Masmorra</strong>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Tetos:</strong> A maioria das cavernas tem 3 metros de altura, com a área 3 tendo 6 metros e a área 8 tendo 9 metros de altura.</li>
+                        <li><strong>Luz:</strong> A caverna é completamente escura. Os goblins têm visão no escuro. Os jogadores precisarão de fontes de luz, o que denunciará as suas posições.</li>
+                        <li><strong>O Riacho e o Som:</strong> O riacho que flui pela caverna tem cerca de 60 centímetros de profundidade. Mover-se através dele conta como terreno difícil. A cachoeira e a água corrente criam um barulho constante que abafa os sons (personagens a ouvir algo têm desvantagem em testes de Percepção baseados em audição).</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #c0392b; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #e74c3c;">🌲 Área 1: A Entrada da Caverna</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Seguindo as pegadas dos goblins, vocês chegam a uma grande caverna na encosta de uma colina irregular e desmoronada. Um riacho raso flui para fora da caverna, cuja água é limpa, fria e rápida. Um matagal denso esconde a área do lado direito da entrada."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Analisar os Rastos:</strong> Personagens que procurarem por rastos e passarem num <b>Teste de Sabedoria (Sobrevivência) CD 10</b> notam que cerca de uma dúzia de goblins passou por aqui com frequência, e revelam sinais de que dois corpos com tamanho humano foram arrastados floresta adentro.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #2ecc71; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #2ecc71;">🏹 Área 2: O Esconderijo dos Goblins</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "O lado leste do riacho é um emaranhado denso de sarças e arbustos que bloqueiam a visão da entrada da caverna. As plantas criam uma camuflagem natural."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Matagal:</strong> Mover-se pelos arbustos conta como terreno difícil. Uma clareira no centro do matagal serve como posto de guarda.</li>
+                        <li><strong>Vigilância:</strong> Dois goblins estão aqui. Se os personagens estiverem a usar fontes de luz ou não usarem Furtividade, os goblins reparam neles automaticamente antes do grupo os ver.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-goblin" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Goblin.png" alt="Goblin Guarda">
+                    <br><strong>Goblins Guardas (x2) ⚔️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Tática de Combate:</span> Eles têm cobertura de 3/4 por causa do mato, o que lhes garante <b>+5 na Classe de Armadura (CA) e em Testes de Destreza</b>. Eles atiram flechas e tentam manter-se escondidos usando <em>Fuga Ágil</em>.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Fuga e Alarme:</span> Se os goblins forem notados e se sentirem ameaçados, um deles vai atirar flechas enquanto o outro foge para dentro da caverna pela passagem escura para alertar os goblins da Área 7 (as piscinas).</div>
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #e67e22; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #e67e22;">🐺 Área 3: O Canil</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Assim que entram na caverna, o cheiro forte de animais mal cuidados atinge vocês. Rugidos selvagens e o som de correntes batendo ecoam. Três lobos ferozes estão presos a uma estalagmite por correntes de ferro grossas. Perto deles há uma pilha de ossos roídos e lixo espalhado. Uma fenda íngreme e estreita sobe pela parede oeste da caverna."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Alcance das Correntes:</strong> As correntes têm exatamente 3 metros (10 pés) de comprimento. Personagens que se mantiverem fora deste raio não podem ser atacados, mas os lobos uivarão furiosamente se virem estranhos.</li>
+                        <li><strong>A Fenda (Chaminé para Klarg):</strong> O lixo no fundo da sala escorregue de uma chaminé estreita cheia de detritos que sobe 9 metros de altura, chegando diretamente ao covil do líder (Área 8). Subir ou descer a chaminé exige um <b>Teste de Força (Atletismo) CD 10</b>. Se um jogador falhar no teste em 5 ou mais, ele cai e leva 1d6 de dano de concussão por cada 3 metros de queda, atraindo a atenção imediata.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-lobo" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Lobo.png" alt="Lobo">
+                    <br><strong>Lobos (x3) 🐺</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Acalmar os Lobos (Mecânica):</span> Um personagem pode usar a sua ação para tentar acalmar os lobos passando num <b>Teste de Sabedoria (Lidar com Animais) CD 15</b>. Se o personagem atirar comida para eles, <b>a CD deste teste cai para 10</b>. Se tiverem sucesso, os lobos param de uivar e ignoram o grupo enquanto eles não chegarem a menos de 3 metros deles.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Ataque e Fuga:</span> Se entrarem no alcance das correntes ou atacarem, os lobos lutam com Tática de Matilha. Os lobos estão condicionados pelos goblins, por isso, se os aventureiros se afastarem do alcance das correntes ou saírem da sala, os lobos param de atacar e voltam a uivar.</div>
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #2980b9; padding: 10px; border-left: 4px solid #3498db; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #85c1e9;">🌊 Área 4: Passagem Íngreme</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "A partir deste ponto, a passagem principal sobe em um ângulo íngreme, acompanhando a correnteza do riacho escuro. As paredes molhadas estreitam-se ligeiramente enquanto a água desce."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Gatilho da Armadilha:</strong> Se o goblin da Área 5 avistar os aventureiros, ele sinaliza silenciosamente para os goblins da Área 7 soltarem a primeira enchente. A água leva 1 turno para chegar.</li>
+                        <li><strong>Zona de Perigo:</strong> A enchente ameaça todas as criaturas no túnel. (Criaturas que estejam na Área 5, ou que declarem estar escalando as paredes fora da água, estão a salvo).</li>
+                        <li><strong>A Enchente (Mecânica Exata):</strong> Qualquer criatura na passagem da Área 4 ou nos degraus da Área 3 deve fazer os seguintes testes:
+                            <br>1º - <b>Teste de Resistência de Destreza CD 10</b> para desviar e não ser levado.
+                            <br>2º - Se falhar, pode tentar um <b>Teste de Resistência de Força CD 15</b> para se segurar nas pedras.
+                            <br>3º - <b>Falha Total:</b> Se falhar em ambos, o personagem é derrubado, arrastado até a Área 1 (Entrada), e sofre <b>1d6 de dano de concussão</b> pelo caminho.
+                        </li>
+                        <li><strong>Segunda Enchente:</strong> Os goblins da Área 7 podem soltar uma segunda represa, mas SÓ o farão se o goblin da ponte mandar. O guarda espera para ver se a primeira enchente limpou os intrusos antes de gritar a ordem da segunda.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #95a5a6; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #95a5a6;">🌉 Área 5: A Ponte Pênsil e a Passagem Ocidental</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Nas sombras, a cerca de seis metros (20 pés) de altura logo à frente, onde um túnel mais alto passa sobre o riacho, uma ponte de suspensão cruza o espaço. Ela é feita de tábuas de madeira amarradas frouxamente com cordas grossas e parece precária. A oeste, uma passagem íngreme e cheia de entulho sobe em direção à escuridão."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Destruir a Ponte (Mecânica):</strong> A ponte tem <b>Classe de Armadura (CA) 5 e 10 Pontos de Vida (PV)</b>. Se os PV chegarem a 0, a ponte desaba. (Vulnerabilidade a dano de fogo). Qualquer um sobre a ponte quando ela for destruída cai 6 metros no riacho rochoso, sofrendo <b>2d6 de dano de queda</b>.</li>
+                        <li><strong>A Passagem Ocidental (Armadilha Natural):</strong> O túnel íngreme a oeste está cheio de entulho solto. Mover-se por ele conta como <b>Terreno Difícil</b>.</li>
+                        <li><strong>Desmoronamento do Entulho (Mecânica Exata):</strong> A elevação entre os dois relevos dessa passagem é extremamente frágil. Qualquer peso <b>acima de 45 kg</b> (basicamente qualquer personagem com equipamento) faz o chão ceder, rolando tudo para leste.
+                            <br>- <em>O Teste:</em> Qualquer criatura na elevação deve fazer um <b>Teste de Resistência de Destreza CD 10</b>.
+                            <br>- <em>Falha:</em> Sofre <b>2d6 de dano de concussão</b> e é <b>derrubada (caída)</b>.
+                            <br>- <em>Sucesso:</em> Sofre apenas metade do dano e não cai.
+                        </li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #2c003e; padding: 10px; border-left: 4px solid #9b59b6; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #9b59b6;">🔥 Área 6: O Covil dos Goblins</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Esta grande caverna é dividida em duas metades, separadas por uma escarpa de três metros de altura (10 pés). Um lance de degraus naturais íngremes leva do patamar inferior para o superior. O ar está nebuloso com a fumaça de uma fogueira de cozimento, e tem um cheiro forte de pele mal assada."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>A Fumaça e a Luz:</strong> A fogueira ilumina a caverna inteira. A fumaça acumula-se no teto e não prejudica a visão ou o combate.</li>
+                        <li><strong>A Escarpa (Mecânica):</strong> O declive entre os dois níveis tem 3 metros de altura. Um personagem que tente escalar diretamente a parede de pedra em vez de usar os degraus deve ser bem-sucedido num <b>Teste de Força (Atletismo) CD 15</b>.</li>
+                        <li><strong>A Disposição:</strong> Cinco goblins estão na área inferior, ao redor da fogueira. No patamar superior está o segundo em comando, Yeemik, juntamente com o prisioneiro Sildar Hallwinter.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-goblin" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Yemik.png" alt="Yeemik">
+                    <br><strong>Yeemik e Bando (x6) 🎭</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">A Tática do Refém:</span> Se 3 ou mais goblins forem derrotados, Yeemik exige uma trégua. Se os aventureiros recusarem, ele agarra Sildar e o arrasta até a beirada da escarpa, ameaçando empurrá-lo.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O Acordo de Yeemik:</span> Ele quer destituir Klarg. Promete libertar Sildar se o grupo for à Área 8 matar Klarg e trouxer a cabeça do Bugbear como prova. <em>(Nota: Se o grupo cumprir o acordo, Yeemik quebra a promessa e exige um pagamento em ouro para libertar Sildar, pois goblins não são confiáveis).</em></div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Loot (Em Yeemik):</span> Yeemik carrega uma algibeira contendo 3 dentes de ouro (1 PO cada) e 15 PP. O equipamento de Sildar não está aqui, foi levado para a Área 8.</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-sildar" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/sildar.png" alt="Sildar Hallwinter">
+                    <br><strong>Sildar Hallwinter 🤝</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Status Crítico:</span> Sildar está com apenas <b>1 PV</b>, não possui armas e a sua armadura foi roubada (CA 10). Se Yeemik o empurrar da escarpa, ele cai 3 metros, sofre 1d6 de dano de concussão (caindo a 0 PV) e começa a fazer testes de resistência contra a morte.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O que ele sabe (Se salvo):</span>
+                            <br>1. Gundren foi levado pelos goblins junto com o seu mapa para um lugar chamado <b>Castelo Cragmaw</b>.
+                            <br>2. Quem mandou fazer isso foi um indivíduo misterioso chamado <b>"O Aranha Negra"</b>.
+                            <br>3. Gundren tinha encontrado o local perdido da <b>Caverna do Eco (A Forja das Magias)</b>.
+                            <br>4. Sildar viajou com Gundren para investigar o desaparecimento de <b>Iarno Albrek</b>, um colega da Aliança dos Lordes que sumiu em Phandalin.
+                        </div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">A Recompensa:</span> Sildar promete pagar <b>50 PO</b> se o grupo o escoltar com segurança até a estalagem em Phandalin (ele precisará pedir um empréstimo na vila para pagar).</div>
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #f1c40f; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #f1c40f;">💧 Área 7: As Piscinas Gémeas (Origem da Enchente)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Esta caverna está dividida ao meio por um declive de três metros de altura (10 pés). Uma escada natural íngreme liga o nível inferior ao superior. O ar está húmido e o barulho de uma cachoeira ecoa. O riacho nasce de duas grandes piscinas de água nesta caverna, e cada uma delas tem uma represa frágil feita de pedras rústicas e paus."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>As Represas:</strong> Foram construídas pelos goblins para criar a armadilha de enchente da Área 4. Destruir uma represa liberta uma enxurrada de água.</li>
+                        <li><strong>O Gatilho Oculto:</strong> Se o goblin da ponte (Área 5) avisou esta sala, um dos goblins aqui estará junto à represa, pronto para soltar a segunda enchente assim que os aventureiros aparecerem no túnel.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-goblin" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Goblin.png" alt="Goblins das Piscinas">
+                    <br><strong>Goblins da Água (x3) ⚔️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Tática:</span> O primeiro instinto deles, ao verem os jogadores, é usar a ação para romper a represa e causar a inundação (mesmas regras da Área 4: CD 10 Destreza / CD 15 Força). Depois disso, eles disparam flechas lá de cima e usam <em>Fuga Ágil</em>.</div>
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #e74c3c; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #e74c3c;">👑 Área 8: A Caverna de Klarg (O Chefe)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Sacos e caixotes de suprimentos saqueados estão empilhados no extremo sul desta grande caverna. Ao centro, um grande buraco no chão funciona como lareira natural, enviando fumaça para uma chaminé escura no teto. Vários sacos de dormir estão espalhados, e a face feroz de um Bugbear colossal ilumina-se à luz do fogo."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>A Chaminé (Área 3):</strong> A lareira tem uma descida natural que leva diretamente ao canil dos lobos (Área 3). Klarg usa isto como rota de fuga.</li>
+                        <li><strong>Loot de Phandalin:</strong> A maior parte dos caixotes roubados possui um leão azul pintado (símbolo do Escudo do Leão). Devolver as mercadorias intactas a Linene Greywind em Phandalin garante <b>50 PO</b> de recompensa e a amizade dela.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-bugbear" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Bugbear.png" alt="Klarg">
+                    <br><strong>Klarg (O Chefe) ⚔️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Bando do Chefe:</span> Klarg (Bugbear) não está sozinho. Ele luta acompanhado de <b>2 Goblins</b> e do seu companheiro de caça fiel, o Lobo <b>Ripper</b>.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Personalidade e RP:</span> Megalomaníaco. Ele acha-se um rei tirano. Grita coisas como: <em>"Quem ousa desafiar o poderoso Klarg?"</em> e <em>"Klarg vai construir um trono com os vossos ossos!"</em></div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Tática de Emboscada:</span> Se os goblins das outras áreas o avisaram, Klarg esconder-se-á atrás de estalagmites perto da entrada. Ele tem Vantagem no seu primeiro ataque, e se acertar, o seu traço "Ataque Surpresa" causa <b>+2d6 de dano extra</b>. O lobo e os goblins atacam em conjunto.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">A Fuga:</span> Apesar da fanfarronice, se o lobo Ripper for morto ou se Klarg ficar com menos de 10 PV, a sua coragem desaparece. Ele tenta fugir saltando pela chaminé (para a Área 3) e fugindo do complexo.</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-lobo" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Lobo.png" alt="Ripper">
+                    <br><strong>Ripper (Lobo) 🐺</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Lealdade:</span> Ripper protege Klarg fanaticamente. Tem <em>Tática de Matilha</em> (Vantagem no ataque se Klarg ou um goblin estiver adjacente ao alvo).</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/bau de tesouro.png" alt="Baú de Klarg">
+                    <br><strong>O Baú de Klarg 💎</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Esconderijo:</span> Escondido atrás dos caixotes na área sul, Klarg guarda os seus tesouros mais preciosos e o equipamento que roubou.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Conteúdo:</span>
+                            <br>- O equipamento completo de Sildar e Gundren (espadas, escudos, armaduras).
+                            <br>- 600 PC (Peças de Cobre).
+                            <br>- 110 PP (Peças de Prata).
+                            <br>- 2 Poções de Cura (Pode usar uma ação para beber ou dar a alguém, curando 2d4+2 PV).
+                            <br>- Uma pequena estatueta de um sapo feita de jade (Vale <b>40 PO</b>).
+                        </div>
+                    </div>
+                </div>
+            
+            </div>
+
+
+            <div class="titulo-parte">🟡 Parte 2: Phandalin</div>
+            
+            <button class="btn-local" onclick="abrirLocal('phandalin-geral')">🏡 Phandalin (Visão Geral)</button>
+            <div id="phandalin-geral" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #111; padding: 10px; border-left: 4px solid #fff; border-radius: 4px; font-size: 0.9em; margin-bottom: 15px;">
+                    <strong style="color: #fff;">ℹ️ O Povoado de Phandalin</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "A estrada de terra junta-se a uma trilha mais larga que leva a um assentamento construído no sopé das montanhas frias. Phandalin consiste em cerca de quarenta ou cinquenta casas de troncos simples, algumas construídas sobre fundações de pedras antigas. Ruínas de muros e fundações de pedra indicam que este lugar já foi uma cidade muito maior no passado. Algumas pessoas estão trabalhando nos campos de maçãs ou cuidando de animais, e todas olham para vocês com uma mistura de curiosidade e cautela."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>História:</strong> Phandalin foi uma cidade próspera há 500 anos, aliada aos anões e gnomos do Pacto de Phandelver. Foi destruída por orcs e está sendo repovoada há apenas alguns anos.</li>
+                        <li><strong>Lei e Ordem:</strong> Não existem muralhas nem guardas. O "Mestre da Cidade" (Harbin Wester) é o juiz e mediador, mas ele é um covarde que se recusa a confrontar criminosos.</li>
+                        <li><strong>A Ameaça:</strong> Os <b>Bandidos Marcarrubra (Redbrands)</b> aterrorizam a vila, cobrando "taxas de proteção" e assediando os moradores. Eles têm base na Mansão Tresendar (as ruínas na colina a leste).</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Harbin Wester">
+                    <br><strong>Harbin Wester (Mestre da Cidade) 🏛️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Humano gordo e pomposo, mas visivelmente nervoso. Ele evita contato visual quando o assunto são os Marcarrubra.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Posição:</span> Ele foi eleito pelos mineiros. É o responsável por pagar as recompensas dos cartazes no quadro de avisos.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O que ele diz:</span> "Os Marcarrubra? Ah, são apenas uma guilda de mercenários... nada com que se preocupar, eles mantêm as coisas em ordem... às vezes." (Ele está mentindo por medo).</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Missão do Cume da Wyvern:</span> Ele oferece 100 PO para o grupo que eliminar o bando de orcs que está atacando viajantes perto do Cume da Wyvern.</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Mineiro de Phandalin">
+                    <br><strong>Habitante Local 👨‍🌾</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Clima Geral:</span> Os mineiros e fazendeiros estão desanimados. Se os jogadores mostrarem que são heróis, eles começam a falar sobre o desaparecimento de Thel Dendrar e como a vila precisa de ajuda.</div>
+                    </div>
+                </div>
+            
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('estalagem-colina')">🍺 1. Estalagem Colina de Pedra</button>
+            <div id="estalagem-colina" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #8b4513; padding: 10px; border-left: 4px solid #d35400; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #f39c12;">🍺 Estalagem Colina de Pedra (Stonehill Inn)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "No centro da vila ergue-se uma estalagem espaçosa recém-construída em pedra bruta e madeira serrada. A sala comunal está cheia de moradores locais a beber cerveja de caneca ou sidra, todos a conversar animadamente."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Serviços:</strong> Os quartos são muito confortáveis e custam <b>5 PP por dia</b>. As refeições custam <b>1 PP</b>.</li>
+                        <li><strong>O Dono:</strong> Toblen Stonehill. Um humano jovem, baixo e amigável. Ele veio da cidade de Inverno Remoto (Neverwinter) para minerar, mas percebeu que sabia mais sobre estalagens.</li>
+                        <li><strong>O Clima:</strong> É o único lugar seguro para os moradores relaxarem. Os bandidos Marcarrubra não vêm aqui (eles frequentam o <em>Pomo Adormecido</em>, uma taverna suja noutro ponto da vila).</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/toblen .png" alt="Toblen Stonehill">
+                    <br><strong>Toblen (Estalajadeiro) 🍺</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O que ele sente:</span> Toblen está chateado com o gangue dos Marcarrubra, mas não faz nada por medo de represálias contra a sua família. Ele acha que o Prefeito (Harbin Wester) é um inútil.</div>
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #3498db; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #3498db;">🗣️ Os Boatos da Taverna (Ganchos de Missão)</strong>
+                    <p style="color: #ccc; margin-top: 5px; font-size: 0.9em;"><em>Se os jogadores conversarem com os moradores, use estes NPCs para distribuir missões secundárias:</em></p>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Trilena">
+                    <br><strong>Trilena (A Esposa) 👩</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Boato (O Assassínio):</span> "Aquele rapaz, o Thel Dendrar, o entalhador de madeira... Ele enfrentou os Marcarrubra no outro dia quando eles assediaram a sua mulher. Eles assassinaram o pobre homem à frente da família. Agora a sua esposa Mirna e os filhos sumiram!"</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Destino:</span> Leva os jogadores à Mansão Tresendar para resgatar a família Dendrar.</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Pip">
+                    <br><strong>Pip (O Filho) 👦</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Boato (A Passagem Secreta):</span> "O meu amigo Carp (filho de Qelline Alderleaf) encontrou um túnel secreto na floresta que vai dar mesmo por baixo da velha Mansão Tresendar!"</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Destino:</span> Indica aos jogadores irem à Fazenda Alderleaf falar com o Carp para descobrir a entrada secreta do Esconderijo.</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Elsa">
+                    <br><strong>Elsa (A Criada) 🍻</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Boato (O Veterano):</span> "Aquele tal de Daran Edermath, o velho que toma conta do Pomar da Maçã na vila... eu ouvi dizer que ele era um aventureiro no passado!"</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Destino:</span> Leva os jogadores ao Pomar Edermath (onde Daran lhes falará sobre o Poço da Velha Coruja).</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Narth">
+                    <br><strong>Narth (Fazendeiro) 🌾</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Boato (A Clériga Ferida):</span> "A Irmã Garaele, aquela elfa que cuida do Santuário da Sorte, saiu da vila recentemente durante alguns dias. Ela regressou toda ferida e exausta..."</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Destino:</span> Leva os jogadores ao Santuário da Sorte (para iniciarem a missão do Covil da Banshee Agatha).</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Lanar">
+                    <br><strong>Lanar (Mineiro) ⛏️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Boato (Os Orcs):</span> "Bando de orcs a descer das montanhas! Têm sido vistos no extremo leste da Trilha Triboar. O Mestre da Cidade, Harbin Wester, pôs um aviso a oferecer uma recompensa a quem acabar com eles."</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Destino:</span> Leva os jogadores à Câmara Municipal ou diretamente para o Cume da Wyvern (Wyvern Tor).</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Freda">
+                    <br><strong>Freda (A Tecelã) 🧵</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">O Boato (A Exceção de Halia):</span> "Os Marcarrubra chateiam todos os negócios desta vila... todos exceto o Troca de Minérios. Eles não se metem com a Halia Thornton. Qual será o segredo dela?"</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Destino:</span> Planta a suspeita sobre Halia (que na verdade quer controlar a cidade e quer os Marcarrubra mortos para assumir a sua posição).</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('loja-barthen')">🛒 2. Provisões Barthen</button>
+            <div id="loja-barthen" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #2c3e50; padding: 10px; border-left: 4px solid #2980b9; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #3498db;">🛒 Provisões Barthen (Barthen's Provisions)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "A Provisões Barthen é o maior posto de comércio em Phandalin. As suas prateleiras guardam a maioria dos bens e suprimentos comuns, incluindo mochilas, sacos de dormir, cordas e rações. O local fica aberto do nascer ao pôr do sol."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Comércio:</strong> Vende qualquer equipamento normal de aventura do Livro do Jogador que custe 25 PO ou menos. <b>Não vende armas nem armaduras.</b></li>
+                        <li><strong>Funcionários:</strong> O dono, Elmar Barthen, é ajudado por dois jovens balconistas (Ander e Thistle).</li>
+                        <li><strong>O Pagamento da Carroça:</strong> Se os jogadores trouxerem a carroça de suprimentos do Gundren (missão inicial), Barthen paga os <b>10 PO prometidos a cada personagem</b>, e fica com a mercadoria.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Elmar Barthen.png" alt="Elmar Barthen">
+                    <br><strong>Elmar Barthen 🤝</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Personalidade:</span> Humano magro, calvo e de cinquenta anos, com um temperamento amável. Considera Gundren um amigo de longa data e ficará entristecido e chocado ao saber da emboscada.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Sobre os Irmãos Buscarocha (Lore):</span> "O Gundren disse que ia buscar a carroça, mas não o vejo. Os dois irmãos dele, Nundro e Tharden, estão acampados em algum lugar fora da cidade. Não os vejo há mais de uma semana. Não sei onde fica a Caverna do Eco, mas sei que as escavações estão a ir bem."</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Sobre os Marcarrubra (Lore):</span> Ele odeia-os e avisa os heróis. "Eles ficam numa taverna suja chamada <em>Pomo Adormecido</em>. Eles extorquem dinheiro a todos e acho que o esconderijo principal deles é por baixo da velha Mansão Tresendar."</div>
+                    </div>
+                </div>
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('escudoleao')">🦁 3. Escudo do Leão (Posto Comercial)</button>
+            <div id="escudoleao" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #5c1d1a; padding: 10px; border-left: 4px solid #e74c3c; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #f1948a;">🦁 Escudo do Leão (Lionshield Coster)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Pendurado acima da porta da frente deste modesto posto de comércio há um sinal feito de um escudo de madeira pintado com um leão azul. Este edifício é propriedade do Escudo do Leão, uma companhia mercantil sediada na cidade de Yartar, que vende e transporta armaduras e armas."
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #e74c3c; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #f14c3c;">📜 Missão Ativa: Recuperar Mercadorias Roubadas</strong>
+                    <p style="margin: 5px 0; color: #ccc;">Um carregamento vital de suprimentos militares da Linene foi emboscado e roubado por goblins na Trilha Triboar.</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Objetivo:</strong> Localizar e trazer de volta os caixotes marcados com o símbolo do Leão Azul (estão escondidos na Área 8 do Esconderijo Dentefino).</li>
+                        <li><strong>Recompensa:</strong> <b>50 PO</b> em dinheiro e o respeito comercial da Linene.</li>
+                    </ul>
+                    
+                    <hr class="ficha-hr">
+                    
+                    <strong style="color: #f1c40f;">⚔️ Equipamento e Limitações de Estoque:</strong>
+                    <div style="color: #aaa; font-size: 0.85em; margin-top: 5px; line-height: 1.4;">
+                        🔴 <strong>ESTADO ATUAL (Bloqueado):</strong> Vende apenas armas simples curtas (adagas, espadas curtas), armaduras de couro simples e escudos de madeira comuns.
+                        <br>⚠️ <em style="color: #f1948a;">Devido ao roubo recente, ela recusa-se terminantemente a vender armas pesadas, bestas militares ou armaduras metálicas pesadas para qualquer um!</em>
+                        <br><br>
+                        🟢 <strong>APÓS A DEVOLUÇÃO (Desbloqueado):</strong> Todo o arsenal de combate padrão da tabela do Livro do Jogador fica permanentemente disponível para compra com pequenos descontos.
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Linene Greywind.png" alt="Linene Graywind">
+                    <br><strong>Linene Graywind 🤝</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Direta, honesta e de língua afiada. Costuma cruzar os braços rigidamente enquanto fala e não tolera tolices. Guarda uma besta pesada carregada e escondida debaixo do balcão para garantir a sua segurança contra criminosos.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">A Missão:</span> "Se vocês encontrarem as minhas caixas de suprimentos naquela toca de monstros, eu pago as 50 peças de ouro na hora. Mas não tentem me enganar, eu conheço muito bem as minhas marcas!"</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O que sabe:</span> Ela odeia os Marcarrubra fanaticamente e proibiu-os de pisar na sua loja. Ela avisa o grupo: "Vocês parecem durões... tenham muito cuidado com os Marcarrubra. São bandidos da pior espécie e controlam a vila inteira a partir das ruínas da Mansão Tresendar."</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('troca-minerios')">⚖️ 4. Troca de Minérios (Miner's Exchange)</button>
+            <div id="troca-minerios" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #34495e; padding: 10px; border-left: 4px solid #f1c40f; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #f1c40f;">⚖️ Troca de Minérios</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "O Câmbio de Minério é um posto de troca onde os mineiros locais trazem os bens valiosos que encontraram para serem pesados, medidos e pagos. Na falta de qualquer lorde ou autoridade local, o câmbio também serve como um cartório não oficial, registrando reivindicações de várias terras e escavações ao redor da área."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Ponto de Encontro:</strong> O câmbio é um ótimo lugar para conhecer pessoas que gastam muito tempo fora, no campo e nas montanhas que cercam Phandalin.</li>
+                        <li><strong>A Intenção da Guilda:</strong> A mestra da guilda tenta estabelecer este local como a coisa mais próxima de uma autoridade governamental na vila, agindo como mais do que uma simples casa comercial.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #9b59b6; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #9b59b6;">📜 Missão: A Oferta de Halia (Zhentarim)</strong>
+                    <p style="margin: 5px 0; color: #ccc;">Halia quer o monopólio do poder na cidade e a presença dos Marcarrubra (Redbrands) é um obstáculo para os seus negócios.</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Objetivo:</strong> Eliminar o líder dos Marcarrubra (um mago misterioso) e trazer qualquer correspondência ou documentos roubados dos seus aposentos diretamente para ela.</li>
+                        <li><strong>Recompensa:</strong> Ela oferece <b>100 PO</b> pelas informações e documentos. Além disso, se os jogadores forem implacáveis, ela pode tentar recrutá-los para a rede secreta dos <em>Zhentarim</em>.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Halia Thronton.png" alt="Halia Thornton">
+                    <br><strong>Halia Thornton 🐍</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Uma humana ambiciosa e calculista. Ela é controladora, fala de forma polida mas intimidadora, e nunca perde a postura.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O Segredo:</span> Ela é uma agente ativa dos <b>Zhentarim</b>, uma poderosa e sombria organização clandestina que busca riqueza e controlo político através de toda a Costa da Espada.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Sobre os Marcarrubra:</span> Ao contrário dos outros civis, ela não tem medo deles. Ela sabe que a base deles é sob a Mansão Tresendar e percebeu que eles estão a ser liderados por uma mente brilhante que ela ainda não identificou (o Cajado de Vidro). Ela manipula os aventureiros para fazerem o trabalho sujo por ela.</div>
+                    </div>
+                </div>
+
+            </div>
+            
+            <button class="btn-local" onclick="abrirLocal('santuario-sorte')">🍀 5. Santuário da Sorte (Shrine of Luck)</button>
+            <div id="santuario-sorte" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #2c3e50; padding: 10px; border-left: 4px solid #aeb6bf; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #d6eaf8;">🍀 Santuário da Sorte (Shrine of Luck)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "O único templo de Phandalin é um pequeno santuário feito de pedras retiradas das ruínas mais próximas. É dedicado a Tymora, a deusa da sorte e da boa fortuna."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>A Importância:</strong> Os mineiros e aventureiros da vila costumam vir aqui atirar uma moeda de prata e pedir sorte antes de uma viagem perigosa.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #5dade2; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #85c1e9;">📜 Missão: O Acordo da Banshee</strong>
+                    <p style="margin: 5px 0; color: #ccc;">Garaele tentou convencer a banshee Agatha a responder a uma pergunta, mas falhou e quase morreu. Ela precisa de mediadores.</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Item Quest:</strong> Ela entrega aos jogadores um <b>pente de prata incrustado com pedras preciosas</b> (suborno para a banshee).</li>
+                        <li><strong>Objetivo:</strong> Encontrar o covil em Conyberry e perguntar a Agatha: <em>"Qual é o paradeiro do livro de magias do mago Bowgentle?"</em></li>
+                        <li><strong>Recompensa:</strong> 3 Poções de Cura.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-acolito" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Irmã Garaele">
+                    <br><strong>Irmã Garaele ✨</strong>
+                    <div class="ficha-npc">
+                        
+                        <div style="background-color: #111; border-left: 3px solid #2ecc71; padding: 6px; margin-bottom: 8px; font-size: 0.95em;">
+                            <strong style="color: #2ecc71;">💉 Serviços de Cura (Magia):</strong><br>
+                            <span style="color: #ddd;">Como sacerdotisa, Garaele pode conjurar <em>Curar Ferimentos</em> (Cure Wounds). Ela costuma pedir uma doação de <b>10 PO</b> para o templo por cada cura, mas pode fazê-lo de graça se os heróis estiverem a ajudar Phandalin ou aceitarem a sua missão.</span>
+                        </div>
+
+                        <div><span class="ficha-destaque">Maneirismo:</span> Jovem elfa zelosa, atualmente ferida e exausta do seu encontro com a banshee.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O Segredo (Os Harpistas):</span> Ela é agente da rede clandestina dos <b>Harpistas (Harpers)</b>, que dedicam as suas vidas a lutar contra tiranos. A missão do livro de magias foi uma ordem dos seus superiores.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('pomar-edermath')">🍎 6. Pomar Edermath (Edermath Orchard)</button>
+            <div id="pomar-edermath" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #1e5128; padding: 10px; border-left: 4px solid #4caf50; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #a5d6a7;">🍎 Pomar Edermath</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Passando por um caminho de terra, vocês encontram uma cabana limpa e arrumada ao lado de um belo pomar de macieiras. Um meio-elfo de cabelos grisalhos está a trabalhar no jardim, podando as árvores com precisão."
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #8bc34a; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #cddc39;">📜 Missão: O Poço da Coruja Velha (Old Owl Well)</strong>
+                    <p style="margin: 5px 0; color: #ccc;">Daran ouviu histórias de garimpeiros sobre mortos-vivos rondando umas ruínas antigas nas montanhas a leste.</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Local:</strong> As ruínas de uma velha torre de vigia do antigo império de Netheril, conhecida como o Poço da Coruja Velha.</li>
+                        <li><strong>Objetivo:</strong> Viajar até as ruínas, descobrir quem ou o que está criando os zumbis e limpar a área da ameaça.</li>
+                        <li><strong>Recompensa Oculta:</strong> Se os heróis se provarem valorosos, Daran tentará recrutá-los para a sua Ordem.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-veterano" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Daran Edermath">
+                    <br><strong>Daran Edermath ⚔️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Meio-elfo ex-aventureiro (guerreiro). Muito experiente, com mais de cem anos. Ele não teme os Marcarrubra e tem uma postura marcial.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O Segredo (A Ordem da Manopla):</span> Daran é membro da <b>Ordem da Manopla (Order of the Gauntlet)</b>, um grupo devoto de paladinos e clérigos que buscam destruir o mal onde ele se esconde. Ele atua como um "olheiro" da Ordem na vila.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Sobre os Marcarrubra:</span> Ele odeia-os. Se perceber que os jogadores são bravos, ele diz: <em>"Alguém precisa ensinar uma lição a esses arruaceiros. Sei que eles ficam na taverna do Pomo Adormecido. É hora de mostrar a eles que não são os donos da cidade."</em></div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('fazenda-alderleaf')">🌾 7. Fazenda Alderleaf (Alderleaf Farm)</button>
+            <div id="fazenda-alderleaf" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #5d4037; padding: 10px; border-left: 4px solid #8d6e63; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #d7ccc8;">🌾 Fazenda Alderleaf</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Um pouco mais afastada do centro da vila, encontra-se uma fazenda aconchegante com campos de cultivo bem cuidados e uma casa modesta de madeira. Qelline Alderleaf, uma fazendeira halfling sábia e pragmática, parece saber de tudo o que acontece em Phandalin."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Hospedagem Alternativa:</strong> Qelline é uma anfitriã bondosa. Se os aventureiros não quiserem ficar na Estalagem Colina de Pedra, ela oferece o celeiro de feno para eles dormirem gratuitamente.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #e67e22; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #f39c12;">🕵️ O Segredo de Carp: A Passagem Oculta</strong>
+                    <p style="margin: 5px 0; color: #ccc;">O filho de Qelline, o jovem Carp (10 anos), andava a brincar na floresta perto da Mansão Tresendar e encontrou algo crucial.</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Túnel:</strong> Carp descobriu um túnel secreto escondido num matagal profundo, que leva diretamente às cavernas sob a velha mansão.</li>
+                        <li><strong>A Vantagem (Na Sessão de Hoje):</strong> O menino viu "bandidos grandes e feios" a sair de lá. Se os heróis pedirem, Carp guia-os com muito orgulho até à entrada do túnel. <em>(Nota: Usar este túnel faz os jogadores começarem a invasão do esconderijo direto pela Área 8 - A Fenda!)</em>.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/queline alderleaf.png" alt="Qelline Alderleaf">
+                    <br><strong>Qelline Alderleaf 🌾</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Halfling de 45 anos, tranquila e observadora. Tem muito orgulho na sua fazenda.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O Druida (Gancho de Missão):</span> Se o grupo estiver à procura do Castelo Cragmaw e não souber para onde ir, Qelline sugere que falem com um velho amigo dela chamado <b>Reidoth, o Druida</b>. "Não há um centímetro desta terra que ele não conheça."</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Localização de Reidoth:</span> Ela diz aos heróis que o druida viajou para explorar as ruínas da antiga cidade de <b>Árvore Trovão (Thundertree)</b>, a noroeste de Phandalin.</div>
+                    </div>
+                </div>
+                
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Carp Alderleaf">
+                    <br><strong>Carp (O Menino) 👦</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Personalidade:</span> Um halfling de 10 anos muito animado e aventureiro. Ele acha o grupo de heróis o máximo e sonha em ser um grande aventureiro quando crescer. Ele está ansioso para mostrar o "seu" túnel secreto para impressioná-los.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('salao-chefe')">🏛️ 8. Salão do Chefe da Vila (Townmaster's Hall)</button>
+            <div id="salao-chefe" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #1a365d; padding: 10px; border-left: 4px solid #d4af37; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #f1c40f;">🏛️ Salão do Chefe da Vila (Townmaster's Hall)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "No centro da vila, ergue-se um edifício imponente de pedra com um telhado de telhas de madeira e uma pequena torre de sino na parte superior. Na parede exterior, perto da porta da frente, há um quadro de avisos de madeira onde estão afixados vários cartazes com caligrafia oficial."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>A Carceragem:</strong> O edifício inclui uma pequena prisão no porão com duas celas vazias. As chaves ficam com Harbin. É o único lugar seguro para prender um bandido ou o Iarno.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #d4af37; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #f1c40f;">📜 Missão do Quadro: Orcs do Cume da Wyvern</strong>
+                    <p style="margin: 5px 0; color: #ccc;">Um cartaz assinado pelo Mestre da Cidade, Harbin Wester, pedindo caçadores de monstros.</p>
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Objetivo:</strong> Localizar e eliminar um bando de orcs e ogros que estão a saquear a Trilha Triboar, com base no Cume da Wyvern.</li>
+                        <li><strong>Recompensa:</strong> <b>100 PO</b>, pagas diretamente do cofre municipal.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Harbin Wester">
+                    <br><strong>Harbin Wester (O Prefeito) 🏛️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Humano gordo e pomposo. Ele tenta parecer importante, mas transpira de medo só de ouvir falar nos Marcarrubra.</div>
+                        <hr class="ficha-hr">
+                        
+                        <div style="background-color: #2c2510; border-left: 3px solid #d4af37; padding: 6px; margin-bottom: 8px; font-size: 0.95em;">
+                            <strong style="color: #f1c40f;">🔐 O Cofre da Cidade (Oculto):</strong><br>
+                            <span style="color: #ddd;">Escondido debaixo de um alçapão no escritório de Harbin há um forte cofre de ferro. (Arrombar: <b>Teste de Ferramentas de Ladrão CD 15</b>).<br>
+                            <strong>Loot:</strong> Contém os fundos de emergência de Phandalin: <b>150 PO</b>, <b>200 PP</b>, contratos de terras de fazendeiros locais, e um maço de cartas com denúncias não lidas sobre os Marcarrubra (que Harbin escondeu por medo).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-sildar" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/sildar.png" alt="Sildar Hallwinter">
+                    <br><strong>Sildar (HQ na Vila) 🛡️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">A Nova Base:</span> Assim que é resgatado, Sildar muda-se para aqui. Ele usa a autoridade da <em>Aliança dos Lordes</em> para botar Harbin na linha e organizar Phandalin.</div>
+                        
+                        <div style="background-color: #1a252c; border-left: 3px solid #3498db; padding: 6px; margin-top: 8px; margin-bottom: 8px; font-size: 0.95em;">
+                            <strong style="color: #3498db;">📜 As Duas Missões de Sildar:</strong><br>
+                            <span style="color: #ddd;">
+                            <strong>1. O Destino de Iarno Albrek:</strong> Sildar revela que Iarno era o seu colega na Aliança dos Lordes. Ele desconfia que o líder dos Marcarrubra (Cajado de Vidro) possa ser Iarno ou tê-lo matado. <em>Recompensa:</em> <b>200 PO</b> se o grupo capturar Iarno vivo para ser levado a Inverno Remoto e enfrentar a justiça.<br><br>
+                            <strong>2. Encontrar o Castelo Cragmaw:</strong> Sildar pede que o grupo vasculhe o ermo e descubra onde fica o Castelo para salvar o anão Gundren. Ele vai pedir um empréstimo para os pagar. <em>Recompensa:</em> <b>500 PO</b> pela vida do anão e pelo mapa.
+                            </span>
+                        </div>
+                        
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">O Segredo (Aliança dos Lordes):</span> Sildar é membro leal desta ordem de cavaleiros e políticos que defendem a civilização. Se os heróis eliminarem o Cajado de Vidro ou os Goblins de Cragmaw, Sildar tentará recrutá-los para a facção.</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('gigante-adormecido')">🍺 9. O Gigante Adormecido (Sleeping Giant)</button>
+            <div id="gigante-adormecido" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #2c1a1a; padding: 10px; border-left: 4px solid #c0392b; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #e74c3c;">🍺 O Gigante Adormecido (The Sleeping Giant)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "O Gigante Adormecido é uma taverna desleixada e em ruínas, localizada no extremo leste da vila. O local é sujo, mal iluminado e perigoso, sendo operado por uma anã ranzinza chamada Grista. Nenhum cidadão decente frequenta este lugar."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Reduto:</strong> Este é o principal ponto de encontro e bebedeira do gangue Marcarrubra quando não estão nas ruínas da mansão.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #c0392b; border-radius: 4px; font-size: 0.9em; margin-top: 10px; margin-bottom: 5px;">
+                    <strong style="color: #e74c3c;">⚔️ Encontro Iminente: A Recepção dos Marcarrubra</strong>
+                    <p style="margin: 5px 0; color: #ccc;">Se os aventureiros se aproximarem da taverna, eles não passarão despercebidos.</p>
+                    
+                    <div style="background-color: #222; border: 1px solid #c0392b; padding: 6px; margin-top: 5px;">
+                        <span style="color: #ddd;">
+                        <strong>A Cena:</strong> Quatro Rufiões Marcarrubra estão a beber cerveja na varanda da taverna. Assim que virem o grupo, eles começam a gritar insultos. <em>"Vejam só! Mais cachorrinhos para o colo do prefeito! Deem o fora da nossa cidade!"</em><br><br>
+                        <strong>O Gatilho:</strong> Se os jogadores responderem à altura, não recuarem, ou se já tiverem arranjado problemas com o gangue antes, os bandidos sacam das espadas e atacam sem piedade.
+                        </span>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-redbrand" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/redbrand.png" alt="Rufiões Marcarrubra">
+                    <br><strong>Rufiões Marcarrubra (x4) 🗡️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Tática de Combate:</span> Eles são arrogantes, mas não são burros. Eles atacam em grupo e concentram os seus dois ataques por turno no aventureiro que parecer mais fraco ou que estiver a conjurar feitiços.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Covardia:</span> Se o combate correr mal e três deles forem mortos, o último tentará fugir para a floresta em direção à Mansão Tresendar (para avisar o Cajado de Vidro).</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Captura e Interrogatório:</span> Se os jogadores capturarem e interrogarem um rufião (com um Teste de Intimidação), ele conta que o líder deles é um mago (Cajado de Vidro), que eles têm prisioneiros (a família Dendrar) e revela que há um monstro de um olho só nas cavernas que lê mentes.</div>
+                    </div>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-plebeu" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/Plebeu.png" alt="Grista">
+                    <br><strong>Grista (A Taverneira) 🍺</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Maneirismo:</span> Uma anã rabugenta, rude e pragmática. Ela limpa canecas sujas com um pano ainda mais sujo.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Reação ao Combate:</span> Grista não se mete na luta. Se os Marcarrubra morrerem na varanda dela, ela apenas resmunga sobre quem vai limpar o sangue e não dá nenhuma ajuda voluntária aos jogadores (embora não os ataque).</div>
+                    </div>
+                </div>
+
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('marcarrubra')">🏰 Esconderijo Marcarrubra</button>
+            <div id="marcarrubra" class="conteudo-local">
+
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #c0392b; border-radius: 4px; font-size: 0.9em; margin-bottom: 5px;">
+                    <strong style="color: #e74c3c;">🛢️ Área 1: Adega (A Entrada)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "A porta abre-se revelando uma adega grande e escura que cheira a cerveja velha e azeda. Barris de madeira de vários tamanhos e caixotes vazios estão empilhados contra as paredes."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Alarme (O Rato):</strong> O mago Iarno (Cajado de Vidro) tem um familiar em forma de rato escondido nas sombras. Se os jogadores não usarem Furtividade, o rato ouve-os e avisa Iarno telepaticamente. (Iarno vai preparar-se para fugir se isso acontecer).</li>
+                        <li><strong>Portas Secretas:</strong> Há uma porta secreta na parede sudoeste e outra na parede norte. Um personagem que procurar por portas secretas e passar num <b>Teste de Sabedoria (Percepção) CD 15</b> as encontrará.</li>
+                        <li><strong>Suprimentos:</strong> Os barris contêm cerveja anã e água potável, os caixotes têm carne salgada e farinha. Nada de valor monetário, mas serve como ração.</li>
+                    </ul>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #1e272e; padding: 10px; border-left: 4px solid #3498db; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #3498db;">⚔️ Área 2: Alojamento dos Bandidos</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "Três homens vestindo mantos vermelhos sujos estão a rir alto e a atirar dados sobre uma mesa de madeira tosca, coberta com restos de comida e canecas. O quarto parece ser um quartel mal cuidado, com quatro camas não arrumadas encostadas às paredes."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>Aviso Prévio:</strong> Se os bandidos tiverem ouvido barulho na Área 1, estarão preparados com as espadas curtas em mãos, escondidos atrás da mesa.</li>
+                        <li><strong>Tática de Cobertura:</strong> Como ação, um bandido pode chutar a mesa e virá-la para usá-la como cobertura, ganhando <b>+2 na sua Classe de Armadura (CA)</b> contra ataques à distância.</li>
+                    </ul>
+                </div>
+
+                <div class="personagem-card" data-bestiario="best-redbrand" onclick="abrirFichaNPC(this)">
+                    <img src="tokens/redbrand.png" alt="Bandido Marcarrubra">
+                    <br><strong>Marcarrubras (x3) ⚔️</strong>
+                    <div class="ficha-npc">
+                        <div><span class="ficha-destaque">Luta até à morte?:</span> Não. Eles não têm lealdade cega. Se dois forem mortos, o terceiro tentará fugir ou render-se.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Disfarce:</span> Três mantos vermelhos estão em bom estado (se não forem queimados ou retalhados no combate). Os jogadores podem usá-los para enganar outros bandidos ou os esqueletos da Área 4.</div>
+                        <hr class="ficha-hr">
+                        <div><span class="ficha-destaque">Tesouro da Sala:</span> Há 45 PC, 12 PP e 3 PO espalhados na mesa e nos bolsos dos bandidos.</div>
+                    </div>
+                </div>
+
+                <div style="grid-column: 1 / -1; background-color: #333; padding: 10px; border-left: 4px solid #e67e22; border-radius: 4px; font-size: 0.9em; margin-top: 15px; margin-bottom: 5px;">
+                    <strong style="color: #e67e22;">☠️ Área 3: O Corredor do Fosso (Armadilha)</strong>
+                    
+                    <div style="background-color: #222; border: 1px solid #555; padding: 8px; margin: 8px 0; font-style: italic; color: #d3d3d3;">
+                        "O pó grosso no chão de pedra deste corredor escuro mostra que houve bastante tráfego em ambas as direções. Uma porta de madeira pesada encontra-se na parede sul."
+                    </div>
+
+                    <ul style="margin: 5px 0; padding-left: 20px; color: #ccc;">
+                        <li><strong>O Fosso Oculto:</strong> O chão falso no centro do corredor esconde um fosso de 6 metros de profundidade. O mecanismo foi feito para desabar sob qualquer peso superior a 25 kg.</li>
+                        <li><strong>Identificar a Armadilha:</strong> Um personagem que caminhe pelo corredor e tenha uma <b>Percepção Passiva de 15</b> ou superior percebe o chão falso. Um teste ativo de Percepção também exige CD 15.</li>
+                        <li><strong>A Queda (Mecânica Exata):</strong> Quem pisar no fosso cai 6 metros no chão de terra lá embaixo, sofrendo <b>2d6 de dano de queda (concussão)</b> e ficando <em>Derrubado (Caído)</em>.</li>
+                        <li><strong>Atravessar o Fosso:</strong> As bordas do fosso formam parapeitos estreitos (cerca de 15 cm). Exige um <b>Teste de Destreza (Acrobacia) CD 10</b> para atravessar com segurança.</li>
+                    </ul>
+                </div>
+            </div>
+          
+            <div class="titulo-parte">🟡 Parte 3: A Teia da Aranha</div>
+
+            <button class="btn-local" onclick="abrirLocal('ermos')">👻 Conyberry & Coruja Velha</button>
+            <div id="ermos" class="conteudo-local">
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Agatha"><br><strong>Agatha</strong><div class="ficha-npc"><span class="ficha-destaque">A Banshee:</span> Vaidosa e amarga. Responde a UMA pergunta se for bajulada.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Hamun"><br><strong>Hamun Kost</strong><div class="ficha-npc"><span class="ficha-destaque">Necromante Vermelho:</span> Frio e prático. Quer saber quem construiu a torre.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Zumbis"><br><strong>Zumbis</strong><div class="ficha-npc"><span class="ficha-destaque">Mortos-vivos:</span> Controlados por Hamun Kost. Rondam a área.</div></div>
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('arvore')">🐉 Ruínas Árvore Trovão</button>
+            <div id="arvore" class="conteudo-local">
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Venomfang"><br><strong>Venomfang</strong><div class="ficha-npc"><span class="ficha-destaque">Dragão Verde Jovem:</span> Vaidoso e venenoso. Tenta enganar os jogadores.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Reidoth"><br><strong>Reidoth</strong><div class="ficha-npc"><span class="ficha-destaque">Druida Sábio:</span> Conhece a localização do Castelo Cragmaw.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Cultistas"><br><strong>Cultistas</strong><div class="ficha-npc"><span class="ficha-destaque">Adoradores:</span> Querem aliar-se a Venomfang.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Aranhas"><br><strong>Aranhas</strong><div class="ficha-npc"><span class="ficha-destaque">Aranhas Gigantes:</span> Usam as suas teias para aprisionar.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Zumbis"><br><strong>Zumbis de Cinzas</strong><div class="ficha-npc"><span class="ficha-destaque">Vítimas do Vulcão:</span> Expelem uma nuvem asfixiante ao serem destruídos.</div></div>
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('wyvern')">⛰️ Cume da Wyvern</button>
+            <div id="wyvern" class="conteudo-local">
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Brughor"><br><strong>Brughor</strong><div class="ficha-npc"><span class="ficha-destaque">Chefe Orc:</span> Brutal. Luta até à morte.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Gog"><br><strong>Gog</strong><div class="ficha-npc"><span class="ficha-destaque">Ogro:</span> Burro e esfomeado. Alia-se aos orcs.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Orcs"><br><strong>Orcs</strong><div class="ficha-npc"><span class="ficha-destaque">Guerreiros:</span> Muito agressivos. Fogem se o líder cair.</div></div>
+            </div>
+
+            <button class="btn-local" onclick="abrirLocal('castelo')">🏰 Castelo Dentefino</button>
+            <div id="castelo" class="conteudo-local">
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Rei Grol"><br><strong>Rei Grol</strong><div class="ficha-npc"><span class="ficha-destaque">Líder Bugbear:</span> Velho e cruel. Mantém Gundren cativo.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Vyerith"><br><strong>Vyerith</strong><div class="ficha-npc"><span class="ficha-destaque">Doppelganger:</span> Mensageira do Aranha Negra. Matará Gundren se encurralada.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Gundren"><br><strong>Gundren</strong><div class="ficha-npc"><span class="ficha-destaque">Prisioneiro Anão:</span> Muito ferido. Conhece a Forja das Magias.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Urso"><br><strong>Urso-Coruja</strong><div class="ficha-npc"><span class="ficha-destaque">Fera Cativa:</span> Trancado na torre. Odeia os goblins.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Grick"><br><strong>Grick</strong><div class="ficha-npc"><span class="ficha-destaque">Monstro:</span> Escondido no teto pronto para emboscar.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Hobgoblins"><br><strong>Hobgoblins</strong><div class="ficha-npc"><span class="ficha-destaque">Tropa de Elite:</span> Usam formações táticas.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Goblins"><br><strong>Goblins</strong><div class="ficha-npc"><span class="ficha-destaque">Servos:</span> Têm muito medo do Rei Grol.</div></div>
+            </div>
+
+            <div class="titulo-parte">🟡 Parte 4: Caverna Onda Eco</div>
+
+            <button class="btn-local" onclick="abrirLocal('mina')">⛏️ A Mina Perdida</button>
+            <div id="mina" class="conteudo-local">
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Nezznar"><br><strong>Nezznar</strong><div class="ficha-npc"><span class="ficha-destaque">O Aranha Negra (Drow):</span> Mestre controlador. Tenta render-se se o plano falhar.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Mormesk"><br><strong>Mormesk</strong><div class="ficha-npc"><span class="ficha-destaque">Espectro:</span> Antigo mago de Phandalin.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Caveira"><br><strong>Caveira Flamejante</strong><div class="ficha-npc"><span class="ficha-destaque">Guardiã:</span> Crânio mágico que lança Fogo.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Espectador"><br><strong>Espectador</strong><div class="ficha-npc"><span class="ficha-destaque">Guardião Louco:</span> Flutua perto da Forja das Magias.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Gosma"><br><strong>Gosma Ocre</strong><div class="ficha-npc"><span class="ficha-destaque">Limo Caçador:</span> Imune a corte e eletricidade (dividem o monstro).</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Nundro"><br><strong>Nundro</strong><div class="ficha-npc"><span class="ficha-destaque">Anão Cativo:</span> Irmão de Gundren. Tem sido interrogado.</div></div>
+                <div class="personagem-card" onclick="abrirFichaNPC(this)"><img src="imagens/imagem1.jpg" alt="Carniçais"><br><strong>Carniçais</strong><div class="ficha-npc"><span class="ficha-destaque">Zumbis Famintos:</span> Anões caídos. Garras podem paralisar.</div></div>
+            </div>
+
+        </div> 
+
+        <div class="painel">
+            <h2>🐉 Bestiário (Completo)</h2>
+            <div class="filtros-bestiario">
+                <button class="btn-filtro ativo" onclick="filtrarAuto('todos', this)">Todos</button>
+                <button class="btn-filtro" onclick="filtrarAuto('aberração', this)">Aberrações</button>
+                <button class="btn-filtro" onclick="filtrarAuto('besta', this)">Bestas</button>
+                <button class="btn-filtro" onclick="filtrarAuto('celestial', this)">Celestiais</button>
+                <button class="btn-filtro" onclick="filtrarAuto('constructo', this)">Constructos</button>
+                <button class="btn-filtro" onclick="filtrarAuto('corruptor', this)">Corruptores</button>
+                <button class="btn-filtro" onclick="filtrarAuto('dragão', this)">Dragões</button>
+                <button class="btn-filtro" onclick="filtrarAuto('elemental', this)">Elementais</button>
+                <button class="btn-filtro" onclick="filtrarAuto('fada', this)">Fadas</button>
+                <button class="btn-filtro" onclick="filtrarAuto('gigante', this)">Gigantes</button>
+                <button class="btn-filtro" onclick="filtrarAuto('humanoide', this)">Humanoides</button>
+                <button class="btn-filtro" onclick="filtrarAuto('limo', this)">Limos/Gosmas</button>
+                <button class="btn-filtro" onclick="filtrarAuto('monstruosidade', this)">Monstruosidades</button>
+                <button class="btn-filtro" onclick="filtrarAuto('morto-vivo', this)">Mortos-Vivos</button>
+                <button class="btn-filtro" onclick="filtrarAuto('planta', this)">Plantas</button>
+            </div>
+
+            
+            <p style="font-size: 0.85em; color: #aaa;">Monstros da aventura baseados no Guia dos Monstros.</p>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-aranha')">🕷️ Aranha Gigante</button>
+            <div id="best-aranha" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Besta Grande, sem tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 14 | <span class="ficha-destaque">PV:</span> 26 (4d10+4) | <span class="ficha-destaque">Desl:</span> 9m (Escalada 9m)</div>
+                <hr class="ficha-hr">
+                <div>FOR 14 | DES 16 | CON 12 | INT 2 | SAB 11 | CAR 4</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Furtividade +7</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Sentido Cego 3m, Visão no Escuro 18m, Percepção passiva 10</div>
+                <div><span class="ficha-destaque">Idiomas:</span> —</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1 (200 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Andar na Teia:</span> A aranha ignora restrições de movimento causadas por teias.</div>
+                <div><span class="ficha-destaque">Sentido de Teia:</span> Enquanto em contato com uma teia, a aranha sabe a localização exata de qualquer criatura nela.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Mordida:</span> +5 acertar, alc. 1,5m. <em>Dano:</em> 7 (1d8+3) perfurante. Teste CON (CD 11): sofre 9 (2d8) veneno (falha) ou metade (sucesso). Se cair a 0 PV por veneno, estabiliza mas fica Paralisado por 1h.</div>
+                <div><span class="ficha-destaque">Teia (Recarrega 5-6):</span> +5 acertar, alc. 9/18m. <em>Acerto:</em> Alvo fica <b>Impedido</b>. Pode gastar ação p/ teste FOR (CD 12) p/ soltar. A teia tem CA 10, 5 PV, vulnerável a fogo.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-bugbear')">👹 Bugbear</button>
+            <div id="best-bugbear" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (oblinoide), caótico e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 16 (Gibão, Escudo) | <span class="ficha-destaque">PV:</span> 27 (5d8+5) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 15 | DES 14 | CON 13 | INT 8 | SAB 11 | CAR 9</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Furtividade +6, Sobrevivência +2</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 10</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Goblin</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1 (200 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Surpresa Bruta:</span> Se surpreender uma criatura no 1º turno do combate, o ataque causa +7 (2d6) dano extra.</div>
+                <div><span class="ficha-destaque">Bruto:</span> Uma arma corpo-a-corpo causa um dado de dano extra (já incluído).</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Estrela da Manhã:</span> +4 acertar, alc. 1,5m. <em>Dano:</em> 11 (2d8+2) perfurante.</div>
+                <div><span class="ficha-destaque">Azagaia:</span> +4 acertar, alc. 1,5m ou arremesso 9/36m. <em>Dano:</em> 9 (2d6+2) perfurante (corpo-a-corpo) ou 5 (1d6+2) (à distância).</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-caveira')">💀 Caveira Flamejante</button>
+            <div id="best-caveira" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Morto-vivo Miúdo, neutro e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 13 | <span class="ficha-destaque">PV:</span> 40 (9d4+18) | <span class="ficha-destaque">Desl:</span> Voo 12m</div>
+                <hr class="ficha-hr">
+                <div>FOR 1 | DES 17 | CON 14 | INT 16 | SAB 10 | CAR 11</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Resistências:</span> Elétrico, Necrótico, Perfurante</div>
+                <div><span class="ficha-destaque">Imunidades a Dano:</span> Frio, Fogo, Veneno</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Enfeitiçado, Amedrontado, Paralisado, Envenenado</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 10</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum</div>
+                <div><span class="ficha-destaque">Desafio:</span> 4 (1.100 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Iluminação:</span> Emite luz plena 4,5m e penumbra 4,5m.</div>
+                <div><span class="ficha-destaque">Rejuvenescimento:</span> Volta com todos os PVs em 1 hora, a menos que aspergida com água benta (ou efeitos dissipar magia).</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> Faz dois ataques de Raio de Fogo.</div>
+                <div><span class="ficha-destaque">Raio de Fogo:</span> +5 acertar, alc. 9m. <em>Dano:</em> 10 (3d6) fogo.</div>
+                <div><span class="ficha-destaque">Magias (CD 13):</span> 
+                <br>Truques: <em>Mãos Mágicas</em>
+                <br>1º Nível (3x): <em>Mísseis Mágicos, Escudo Arcano</em>
+                <br>2º Nível (2x): <em>Esfera Flamejante, Nublar</em>
+                <br>3º Nível (1x): <em>Bola de Fogo</em></div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-espectador')">👁️ Espectador</button>
+            <div id="best-espectador" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Aberração Média, leal e neutro</div>
+                <div><span class="ficha-destaque">CA:</span> 14 | <span class="ficha-destaque">PV:</span> 39 (6d8+12) | <span class="ficha-destaque">Desl:</span> Voo flutuante 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 8 | DES 14 | CON 14 | INT 13 | SAB 14 | CAR 11</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Percepção +6</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Derrubado</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 36m, Percepção passiva 16</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Telepatia 36m</div>
+                <div><span class="ficha-destaque">Desafio:</span> 3 (700 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Mordida:</span> +1 acertar, alc. 1,5m. <em>Dano:</em> 2 (1d6-1) perfurante.</div>
+                <div><span class="ficha-destaque">Raios Oculares:</span> Dispara até 2 raios, num único ou múltiplos alvos (até 27m). Cada raio só pode ser usado 1x por turno. Escolhe aleatório ou à escolha: 
+                <br>1- <b>Confusão</b>: Alvo não ganha reações até o fim de seu prox turno. Em seu turno, move aleatório, usa ação p/ atacar perto (ou não faz nada). CD 13 SAB.
+                <br>2- <b>Paralisante</b>: Fica paralisado 1 min. Repete CD 13 CON no fim de seus turnos.
+                <br>3- <b>Medo</b>: Fica Amedrontado 1 min. Repete CD 13 SAB no fim de seus turnos.
+                <br>4- <b>Ferimento</b>: Sofre 16 (3d10) necrótico, metade num sucesso (CD 13 CON).</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">REAÇÕES</span></div>
+                <div><span class="ficha-destaque">Reflexão de Magia:</span> Se for alvo de magia e o teste de resistência for bem sucedido (ou o ataque da magia falhar). Reflete magia de volta pro conjurador.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-esqueleto')">💀 Esqueleto</button>
+            <div id="best-esqueleto" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Morto-vivo Médio, leal e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 13 (Restos Armadura) | <span class="ficha-destaque">PV:</span> 13 (2d8+4) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 10 | DES 14 | CON 15 | INT 6 | SAB 8 | CAR 5</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Vulnerabilidades a Dano:</span> Concussão</div>
+                <div><span class="ficha-destaque">Imunidades a Dano:</span> Veneno</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Exausto, Envenenado</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 9</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Entende idiomas de qdo era vivo, mas não fala.</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1/4 (50 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Espada Curta:</span> +4 acertar, alc. 1,5m. <em>Dano:</em> 5 (1d6+2) perfurante.</div>
+                <div><span class="ficha-destaque">Arco Curto:</span> +4 acertar, alc. 24/96m. <em>Dano:</em> 5 (1d6+2) perfurante.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-gato')">🐾 Gato</button>
+            <div id="best-gato" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Besta Miúda, sem tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 12 | <span class="ficha-destaque">PV:</span> 2 (1d4) | <span class="ficha-destaque">Desl:</span> 12m (Escalada 9m)</div>
+                <hr class="ficha-hr">
+                <div>FOR 3 | DES 15 | CON 10 | INT 3 | SAB 12 | CAR 7</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Percepção +3, Furtividade +4</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 13</div>
+                <div><span class="ficha-destaque">Idiomas:</span> —</div>
+                <div><span class="ficha-destaque">Desafio:</span> 0 (10 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Olfato Aguçado:</span> Vantagem em testes de Percepção (Sabedoria) com olfato.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Garras:</span> +0 acertar, alc. 1,5m. <em>Dano:</em> 1 cortante.</div>
+            </div>
+            <button class="btn-bestiario" onclick="abrirBestiario('best-goblin')">🏹 Goblin</button>
+            <div id="best-goblin" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Pequeno (oblinoide), neutro e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 15 (Couro, Escudo) | <span class="ficha-destaque">PV:</span> 7 (2d6) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 8 | DES 14 | CON 10 | INT 10 | SAB 8 | CAR 8</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Furtividade +6</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 9</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Goblin</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1/4 (50 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Fuga Ágil:</span> Pode realizar a ação Desengajar ou Esconder-se como uma <b>Ação Bônus</b>.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Cimitarra:</span> +4 acertar, alc. 1,5m. <em>Dano:</em> 5 (1d6+2) cortante.</div>
+                <div><span class="ficha-destaque">Arco Curto:</span> +4 acertar, alc. 24/96m. <em>Dano:</em> 5 (1d6+2) perfurante.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-gosma')">🦠 Gosma Ocre</button>
+            <div id="best-gosma" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Limo Grande, sem tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 8 | <span class="ficha-destaque">PV:</span> 45 (6d10+12) | <span class="ficha-destaque">Desl:</span> 9m (Escalada 9m)</div>
+                <hr class="ficha-hr">
+                <div>FOR 15 | DES 6 | CON 14 | INT 2 | SAB 6 | CAR 1</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Resistências a Dano:</span> Ácido</div>
+                <div><span class="ficha-destaque">Imunidades a Dano:</span> Cortante, Elétrico</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Amedrontado, Derrubado, Cego, Encantado, Surdo, Exausto</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Sentido Cego 18m (cego além deste raio), Percepção passiva 8</div>
+                <div><span class="ficha-destaque">Idiomas:</span> —</div>
+                <div><span class="ficha-destaque">Desafio:</span> 2 (450 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Amorfo:</span> Pode mover-se através de frestas até 2cm.</div>
+                <div><span class="ficha-destaque">Escalar em Teias (Patas de Aranha):</span> Escala superfícies (até no teto) sem precisar de teste.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Pancada:</span> +4 acertar, alc. 1,5m. <em>Dano:</em> 9 (2d6+2) concussão + 3 (1d6) ácido.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">REAÇÕES</span></div>
+                <div><span class="ficha-destaque">Dividir:</span> Se receber dano Cortante ou Elétrico e tiver 10 ou mais PV: Divide-se em 2. A nova fica com metade do PV (arredondado para baixo) e tamanho menor.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-lobo')">🐺 Lobo</button>
+            <div id="best-lobo" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Besta Média, sem tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 13 | <span class="ficha-destaque">PV:</span> 11 (2d8+2) | <span class="ficha-destaque">Desl:</span> 12m</div>
+                <hr class="ficha-hr">
+                <div>FOR 12 | DES 15 | CON 12 | INT 3 | SAB 12 | CAR 6</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Percepção +3, Furtividade +4</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 13</div>
+                <div><span class="ficha-destaque">Idiomas:</span> —</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1/4 (50 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Audição e Faro Aguçado:</span> Vantagem em teste de Percepção (Sabedoria).</div>
+                <div><span class="ficha-destaque">Táticas de Matilha:</span> Vantagem em ataques corpo a corpo se um aliado, não incapacitado, estiver a 1,5m do alvo.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Mordida:</span> +4 acertar, alc. 1,5m. <em>Dano:</em> 7 (2d4+2) perfurante. O alvo deve ser bem sucedido no teste de FOR (CD 11) ou ficará <b>Caído</b>.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-notico')">👁️ Nótico</button>
+            <div id="best-notico" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Aberração Média, neutro e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 15 | <span class="ficha-destaque">PV:</span> 45 (6d8+18) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 14 | DES 16 | CON 16 | INT 13 | SAB 10 | CAR 8</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Percepção +4, Arcanismo +3, Intuição +4, Furtividade +5</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão Verdadeira 36m, Percepção passiva 14</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Entende Comum. Telepatia 36m</div>
+                <div><span class="ficha-destaque">Desafio:</span> 2 (450 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Visão Verdadeira:</span> Consegue ver através de ilusões mágicas ou invisibilidade.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> Faz 2 ataques com garras.</div>
+                <div><span class="ficha-destaque">Garras:</span> +4 acertar, alc. 1,5m. <em>Dano:</em> 6 (1d6+3) cortante.</div>
+                <div><span class="ficha-destaque">Olhar Necrótico:</span> Um alvo (que ele consiga ver) a até 9m, precisa passar no CD 12 CON ou recebe 10 (3d6) dano necrótico. Metade com sucesso.</div>
+                <div><span class="ficha-destaque">Segredo Estranho:</span> Alvo até 9m faz Contestado. Enganação (Carisma) contra Intuição do Nótico. Se notico vencer, descobre um segredo sombrio oculto do inimigo.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-urso-coruja')">🐻 Urso-Coruja</button>
+            <div id="best-urso-coruja" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Monstruosidade Grande, sem tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 13 | <span class="ficha-destaque">PV:</span> 59 (7d10+21) | <span class="ficha-destaque">Desl:</span> 12m</div>
+                <hr class="ficha-hr">
+                <div>FOR 20 | DES 12 | CON 17 | INT 3 | SAB 12 | CAR 7</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Percepção +3</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 13</div>
+                <div><span class="ficha-destaque">Idiomas:</span> —</div>
+                <div><span class="ficha-destaque">Desafio:</span> 3 (700 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Faro e Visão Aguçada:</span> Vantagem nos testes de Percepção.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> 1 Bico e 1 Garras.</div>
+                <div><span class="ficha-destaque">Bico:</span> +7 acertar, alc. 1,5m. <em>Dano:</em> 10 (1d10+5) perfurante.</div>
+                <div><span class="ficha-destaque">Garras:</span> +7 acertar, alc. 1,5m. <em>Dano:</em> 14 (2d8+5) cortante.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-zumbi')">🧟 Zumbi</button>
+            <div id="best-zumbi" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Morto-vivo Médio, neutro e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 8 | <span class="ficha-destaque">PV:</span> 22 (3d8+9) | <span class="ficha-destaque">Desl:</span> 6m</div>
+                <hr class="ficha-hr">
+                <div>FOR 13 | DES 6 | CON 16 | INT 3 | SAB 6 | CAR 5</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Imunidades a Dano:</span> Veneno</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Envenenado</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 8</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Entende o idioma que falava em vida, mas não fala</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1/4 (50 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Fortitude Morta-Viva:</span> Se o dano o reduzir a 0 PV (salvo acerto crítico / dano radiante), faz teste de resistência de CON, CD 5 + Dano Sofrido. Sucesso: cai para 1 PV.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Pancada:</span> +3 acertar, alc. 1,5m. <em>Dano:</em> 4 (1d6+1) concussão.</div>
+            </div>
+            
+            <button class="btn-bestiario" onclick="abrirBestiario('best-dragao')">🐉 Dragão Verde Jovem</button>
+            <div id="best-dragao" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Dragão Grande, leal e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 18 (Armadura Natural) | <span class="ficha-destaque">PV:</span> 136 (16d10+48) | <span class="ficha-destaque">Desl:</span> 12m, Voo 24m, Natação 12m</div>
+                <hr class="ficha-hr">
+                <div>FOR 19 | DES 12 | CON 17 | INT 16 | SAB 13 | CAR 15</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Testes de Resistência:</span> DES +4, CON +6, SAB +4, CAR +5</div>
+                <div><span class="ficha-destaque">Perícias:</span> Enganação +5, Percepção +7, Furtividade +4</div>
+                <div><span class="ficha-destaque">Imunidades a Dano:</span> Veneno</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Envenenado</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção às Cegas 9m, Visão no Escuro 36m, Percepção passiva 17</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Dracônico</div>
+                <div><span class="ficha-destaque">Desafio:</span> 8 (3.900 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Anfíbio:</span> O dragão pode respirar ar e água.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> O dragão faz 3 ataques: um com a mordida e dois com as garras.</div>
+                <div><span class="ficha-destaque">Mordida:</span> +7 acertar, alc. 3m. <em>Dano:</em> 15 (2d10+4) perfurante + 7 (2d6) veneno.</div>
+                <div><span class="ficha-destaque">Garras:</span> +7 acertar, alc. 1,5m. <em>Dano:</em> 11 (2d6+4) cortante.</div>
+                <div><span class="ficha-destaque">Sopro de Veneno (Recarrega 5-6):</span> Exala gás venenoso num cone de 9m. Cada criatura na área deve fazer um Teste de CON (CD 14), sofrendo 42 (12d6) de dano de veneno numa falha, ou metade num sucesso.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-hamun')">💀 Hamun Kost (Necromante)</button>
+            <div id="best-hamun" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (humano), leal e mau (Mago Vermelho de Thay)</div>
+                <div><span class="ficha-destaque">CA:</span> 12 (15 com Armadura Arcana) | <span class="ficha-destaque">PV:</span> 22 (5d8) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 9 | DES 14 | CON 11 | INT 17 | SAB 12 | CAR 11</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Testes de Resistência:</span> INT +5, SAB +3</div>
+                <div><span class="ficha-destaque">Perícias:</span> Arcanismo +5, História +5</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 11</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Dracônico, Anão, Élfico</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1 (200 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Tática do Necromante:</span> Hamun Kost raramente luta sozinho. Ele comanda 12 Zumbis que atacam quem o ameaçar.</div>
+                <div><span class="ficha-destaque">Conjuração:</span> É um conjurador de 4º nível. Atributo Mágico: Inteligência (CD 13, +5 acertar). Magias preparadas:
+                <br>Truques: <em>luz, mãos mágicas, raio de gelo, toque chocante</em>
+                <br>1º Nível (4 espaços): <em>armadura arcana, mísseis mágicos, escudo arcano</em>
+                <br>2º Nível (3 espaços): <em>passo brumoso, sugestão</em></div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Espada Curta:</span> +3 acertar, alc. 1,5m. <em>Dano:</em> 4 (1d6+1) perfurante.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-iarno')">🔮 Iarno "Cajavidro" Albrek</button>
+            <div id="best-iarno" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (humano), leal e mau (Líder dos Marcarrubra)</div>
+                <div><span class="ficha-destaque">CA:</span> 13 (16 com Armadura Arcana) - <em>Graças ao Cajado</em> | <span class="ficha-destaque">PV:</span> 22 (5d8) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 9 | DES 14 | CON 11 | INT 17 | SAB 12 | CAR 11</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Testes de Resistência:</span> INT +5, SAB +3</div>
+                <div><span class="ficha-destaque">Perícias:</span> Arcanismo +5, História +5</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 11</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Dracônico, Anão, Élfico</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1 (200 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Equipamento Especial:</span> Empunha o <b>Cajado da Defesa</b> (dá +1 na CA). Ele usa o cajado para conjurar <em>Armadura Arcana</em> antes do combate.</div>
+                <div><span class="ficha-destaque">Conjuração:</span> É um conjurador de 4º nível. Atributo Mágico: Inteligência (CD 13, +5 acertar). Magias preparadas:
+                <br>Truques: <em>luz, mãos mágicas, raio de gelo, toque chocante</em>
+                <br>1º Nível (4 espaços): <em>armadura arcana*, mísseis mágicos, escudo arcano*</em> (*também pode conjurar gastando cargas do Cajado)
+                <br>2º Nível (3 espaços): <em>passo brumoso, sugestão</em></div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Cajado da Defesa:</span> +1 acertar, alc. 1,5m. <em>Dano:</em> 3 (1d6-1) concussão. (Mas ele prefere usar magias).</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">REAÇÕES</span></div>
+                <div><span class="ficha-destaque">Escudo Arcano (Cajado):</span> Usa a sua reação e 1 carga do cajado para ganhar +5 na CA contra um ataque que o acertaria (CA sobe para 21!).</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-nezznar')">🕷️ Nezznar, o Aranha Negra</button>
+            <div id="best-nezznar" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (elfo drow), neutro e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 11 (14 com Armadura Arcana) | <span class="ficha-destaque">PV:</span> 27 (6d8) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 9 | DES 13 | CON 10 | INT 16 | SAB 14 | CAR 13</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Testes de Resistência:</span> INT +5, SAB +4, CAR +3</div>
+                <div><span class="ficha-destaque">Perícias:</span> Arcanismo +5, Furtividade +3, Percepção +4</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 36m, Percepção passiva 14</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Élfico, Subcomum</div>
+                <div><span class="ficha-destaque">Desafio:</span> 2 (450 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Ancestralidade Feérica:</span> Vantagem contra ser enfeitiçado; magias não podem colocá-lo para dormir.</div>
+                <div><span class="ficha-destaque">Sensibilidade à Luz Solar:</span> Desvantagem em ataques e testes de Percepção (visão) sob luz solar.</div>
+                <div><span class="ficha-destaque">Conjuração Inata:</span> (Carisma) À vontade: <em>globos de luz</em>. 1/dia cada: <em>escuridão, fogo das fadas</em>.</div>
+                <div><span class="ficha-destaque">Conjuração (Mago 4º nível):</span> Atributo INT (CD 13, +5 acertar). Magias:
+                <br>Truques: <em>mãos mágicas, raio de gelo, toque chocante</em>
+                <br>1º Nível (4x): <em>armadura arcana, mísseis mágicos, escudo arcano</em>
+                <br>2º Nível (3x): <em>invisibilidade, sugestão</em></div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Cajado da Aranha:</span> +3 acertar, alc. 1,5m. <em>Dano:</em> 4 (1d6+1) concussão, mais 3 (1d6) dano de veneno se Nezznar usar uma carga do cajado (tem 10 cargas; também lança <em>Teia</em> ou <em>Escalada de Aranha</em>).</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-reigrol')">👑 Rei Grol (Bugbear Chefe)</button>
+            <div id="best-reigrol" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (oblinoide), caótico e mau</div>
+                <div><span class="ficha-destaque">CA:</span> 17 (Cota de Malha) | <span class="ficha-destaque">PV:</span> 65 (10d8+20) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 17 | DES 14 | CON 14 | INT 11 | SAB 12 | CAR 11</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Furtividade +6, Intimidação +2, Sobrevivência +3</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 11</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum, Goblin</div>
+                <div><span class="ficha-destaque">Desafio:</span> 3 (700 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Surpresa Bruta:</span> Se surpreender alguém no 1º turno, causa +7 (2d6) dano extra.</div>
+                <div><span class="ficha-destaque">Vantagem Marcial:</span> Uma vez por turno, causa +4 (1d8) dano extra num ataque corpo a corpo (incluso).</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> Faz 2 ataques corpo a corpo.</div>
+                <div><span class="ficha-destaque">Estrela da Manhã:</span> +5 acertar, alc. 1,5m. <em>Dano:</em> 12 (2d8+3) perfurante.</div>
+                <div><span class="ficha-destaque">Azagaia:</span> +5 acertar, alc. 1,5m ou arremesso 9/36m. <em>Dano:</em> 10 (2d6+3) perfurante (corpo a corpo) ou 6 (1d6+3) (distância).</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-doppel')">🎭 Doppelganger</button>
+            <div id="best-doppel" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Monstruosidade Média, neutro</div>
+                <div><span class="ficha-destaque">CA:</span> 14 | <span class="ficha-destaque">PV:</span> 52 (8d8+16) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 11 | DES 18 | CON 14 | INT 11 | SAB 12 | CAR 14</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Enganação +6, Intuição +3</div>
+                <div><span class="ficha-destaque">Imunidades a Condição:</span> Enfeitiçado</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Visão no Escuro 18m, Percepção passiva 11</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum</div>
+                <div><span class="ficha-destaque">Desafio:</span> 3 (700 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Metamorfo:</span> Pode usar sua ação para se polimorfar em um humanoide Pequeno ou Médio que tenha visto. Atributos não mudam. Reverte ao morrer.</div>
+                <div><span class="ficha-destaque">Ataque Surpresa:</span> Se surpreender alguém no 1º turno, causa +10 (3d6) dano extra.</div>
+                <div><span class="ficha-destaque">Ler Pensamentos:</span> (Ação Mágica) Lê pensamentos superficiais de uma criatura até 18m. Enquanto ler, tem Vantagem em ataques e testes de Carisma (Enganação/Intimidação/Persuasão) contra o alvo.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> Faz 2 ataques corpo a corpo.</div>
+                <div><span class="ficha-destaque">Pancada:</span> +6 acertar, alc. 1,5m. <em>Dano:</em> 7 (1d6+4) concussão.</div>
+            </div>
+
+            <button class="btn-bestiario" data-categoria="humanoide"  onclick="abrirBestiario('best-plebeu')">🧑‍🌾 Plebeu (NPC Genérico)</button>
+            <div id="best-plebeu" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (qualquer raça), qualquer tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 10 | <span class="ficha-destaque">PV:</span> 4 (1d8) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 10 | DES 10 | CON 10 | INT 10 | SAB 10 | CAR 10</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 10</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Um idioma qualquer (geralmente Comum)</div>
+                <div><span class="ficha-destaque">Desafio:</span> 0 (10 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Clava:</span> +2 acertar, alc. 1,5m. <em>Dano:</em> 2 (1d4) concussão.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-nobre')">👑 Nobre (NPC Genérico)</button>
+            <div id="best-nobre" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (qualquer raça), qualquer tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 15 (Peitoral) | <span class="ficha-destaque">PV:</span> 9 (2d8) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 11 | DES 12 | CON 11 | INT 12 | SAB 14 | CAR 16</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Enganação +5, Intuição +4, Persuasão +5</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 12</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Dois idiomas quaisquer (geralmente Comum e outro)</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1/8 (25 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Rapieira:</span> +3 acertar, alc. 1,5m. <em>Dano:</em> 5 (1d8+1) perfurante.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">REAÇÕES</span></div>
+                <div><span class="ficha-destaque">Aparar:</span> O nobre adiciona +2 à sua CA contra um ataque corpo a corpo que o acertaria. Para isso, ele precisa estar vendo o atacante e empunhando uma arma de combate corpo a corpo.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-sacerdote')">☀️ Sacerdote (NPC Genérico)</button>
+            <div id="best-sacerdote" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (qualquer raça), qualquer tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 13 (Camisa de Malha) | <span class="ficha-destaque">PV:</span> 27 (5d8 + 5) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 10 | DES 10 | CON 12 | INT 13 | SAB 16 | CAR 13</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Medicina +7, Persuasão +3, Religião +4</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 13</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Dois idiomas quaisquer</div>
+                <div><span class="ficha-destaque">Desafio:</span> 2 (450 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Eminência Divina:</span> Como uma Ação Bônus, o sacerdote pode gastar um espaço de magia para que seus ataques corpo a corpo causem +10 (3d6) de dano radiante extra até o final do turno. O dano aumenta em 1d6 para cada nível de espaço acima do 1º.</div>
+                <div><span class="ficha-destaque">Conjuração:</span> É um conjurador de 5º nível. Atributo Mágico: Sabedoria (CD 13, +5 acertar). Magias preparadas:
+                <br>Truques: <em>chama sagrada, luz, taumaturgia</em>
+                <br>1º Nível (4 espaços): <em>curar ferimentos, raio guiador, santuário</em>
+                <br>2º Nível (3 espaços): <em>arma espiritual, restauração menor</em>
+                <br>3º Nível (2 espaços): <em>dissipar magia, espíritos guardiões</em></div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Maça:</span> +2 acertar, alc. 1,5m. <em>Dano:</em> 3 (1d6) concussão.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-veterano')">⚔️ Veterano (NPC Genérico)</button>
+            <div id="best-veterano" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide Médio (qualquer raça), qualquer tendência</div>
+                <div><span class="ficha-destaque">CA:</span> 17 (Cota de Talas) | <span class="ficha-destaque">PV:</span> 58 (9d8 + 18) | <span class="ficha-destaque">Desl:</span> 9m</div>
+                <hr class="ficha-hr">
+                <div>FOR 16 | DES 13 | CON 14 | INT 10 | SAB 11 | CAR 10</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Atletismo +5, Percepção +2</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 12</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Um idioma qualquer (geralmente Comum)</div>
+                <div><span class="ficha-destaque">Desafio:</span> 3 (700 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> O veterano faz 2 ataques de espada longa. Se ele tiver uma espada curta desembainhada, pode também fazer um ataque com ela.</div>
+                <div><span class="ficha-destaque">Espada Longa:</span> +5 acertar, alc. 1,5m. <em>Dano:</em> 7 (1d8+3) cortante, ou 8 (1d10+3) cortante se usada com as duas mãos.</div>
+                <div><span class="ficha-destaque">Espada Curta:</span> +5 acertar, alc. 1,5m. <em>Dano:</em> 6 (1d6+3) perfurante.</div>
+                <div><span class="ficha-destaque">Besta Pesada:</span> +3 acertar, alc. 30/120m. <em>Dano:</em> 8 (1d10+3) perfurante. (<em>Nota de regra: o ataque correto à distância dele seria +3 acertar e 1d10+1 de dano, o dano base é 6 na média oficial</em>).</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-redbrand')">⚔️ Rufião Marcarrubra</button>
+            <div id="best-redbrand" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide médio (Humano), Neutro e Mau</div>
+                <div>
+                    <span class="ficha-destaque">CA:</span> 14 (Armadura de couro batido) | 
+                    <span class="ficha-destaque">PV:</span> 16 (3d8 + 3) | 
+                    <span class="ficha-destaque">Desl:</span> 9m
+                </div>
+                <hr class="ficha-hr">
+                <div>FOR 11 | DES 14 | CON 12 | INT 9 | SAB 9 | CAR 11 </div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Perícias:</span> Intimidação +2</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 9</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1/2 (100 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> O rufião faz dois ataques corpo a corpo.</div>
+                <div><span class="ficha-destaque">Espada Curta:</span> +4 para acertar, alc. 1,5m. <em>Dano:</em> 5 (1d6 + 2) perfurante.</div>
+            </div>
+
+            <button class="btn-bestiario" onclick="abrirBestiario('best-sildar')">🛡️ Sildar Hallwinter</button>
+            <div id="best-sildar" class="conteudo-bestiario">
+                <div style="font-style: italic; color: #aaa; margin-bottom: 2px;">Humanoide médio (Humano), Leal e Bom</div>
+                <div>
+                    <span class="ficha-destaque">CA:</span> 16 (Malha e Escudo) | 
+                    <span class="ficha-destaque">PV:</span> 27 (5d8 + 5) | 
+                    <span class="ficha-destaque">Desl:</span> 9m
+                </div>
+                <div style="font-size: 0.85em; color: #e74c3c; margin-top: 2px;">
+                    *Na Área 6: CA 10 (sem armadura) e 1 PV apenas.
+                </div>
+                <hr class="ficha-hr">
+                <div>FOR 13 | DES 10 | CON 12 | INT 10 | SAB 11 | CAR 10 </div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">Salvaguardas:</span> For +3, Con +3</div>
+                <div><span class="ficha-destaque">Perícias:</span> Percepção +2</div>
+                <div><span class="ficha-destaque">Sentidos:</span> Percepção passiva 12</div>
+                <div><span class="ficha-destaque">Idiomas:</span> Comum</div>
+                <div><span class="ficha-destaque">Desafio:</span> 1 (200 XP)</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">AÇÕES</span></div>
+                <div><span class="ficha-destaque">Ataques Múltiplos:</span> Sildar faz dois ataques corpo a corpo.</div>
+                <div><span class="ficha-destaque">Espada Longa:</span> +3 acertar, alc. 1,5m. <em>Dano:</em> 5 (1d8+1) cortante.</div>
+                <div><span class="ficha-destaque">Besta Pesada:</span> +2 acertar, alc. 30/120m. <em>Dano:</em> 5 (1d10) perfurante.</div>
+                <hr class="ficha-hr">
+                <div><span class="ficha-destaque">REAÇÕES</span></div>
+                <div><span class="ficha-destaque">Aparar:</span> Sildar adiciona 1 à sua CA contra um ataque corpo a corpo que o atingiria. Requer arma corpo a corpo e ver o atacante.</div>
+            </div>
+
+            
+        </div> </div> <script>
+        
+        function abrirLocal(id) {
+            var elemento = document.getElementById(id);
+            if (!elemento) return; 
+            var estavaAberto = (elemento.style.display === "grid");
+            
+            var todos = document.getElementsByClassName("conteudo-local");
+            for (var i = 0; i < todos.length; i++) { 
+                todos[i].style.display = "none"; 
+            }
+            
+            if (!estavaAberto) { 
+                elemento.style.display = "grid"; 
+            }
+        }
+
+        function abrirFichaNPC(elemento) {
+            // 1. Abre/Fecha o cartão visualmente
+            elemento.classList.toggle("ativo");
+            var estaAberto = elemento.classList.contains("ativo");
+
+            // 2. A Mágica do Bestiário (Com Teletransporte para o Topo)
+            var idBestiario = elemento.getAttribute("data-bestiario");
+            if (idBestiario) {
+                var fichaMonstro = document.getElementById(idBestiario);
+                
+                if (fichaMonstro) {
+                    var btnMonstro = fichaMonstro.previousElementSibling; // O botão acima da ficha
+                    var painel = fichaMonstro.parentNode; // O container do bestiário
+
+                    if (estaAberto) {
+                        // Fecha as outras fichas para ficar limpo
+                        var todasFichas = document.getElementsByClassName("conteudo-bestiario");
+                        for(var i = 0; i < todasFichas.length; i++) {
+                            todasFichas[i].style.display = "none";
+                        }
+                        
+                        // CRIA A ÂNCORA INVISÍVEL (se não existir) para saber o lugar original
+                        if (!document.getElementById("ancora-" + idBestiario)) {
+                            var ancora = document.createElement("div");
+                            ancora.id = "ancora-" + idBestiario;
+                            ancora.style.display = "none";
+                            painel.insertBefore(ancora, btnMonstro);
+                        }
+                        
+                        // TELETRANSPORTA PARA O TOPO (logo abaixo dos filtros)
+                        var filtros = document.querySelector(".filtros-bestiario");
+                        if (filtros) {
+                            painel.insertBefore(btnMonstro, filtros.nextSibling);
+                            painel.insertBefore(fichaMonstro, btnMonstro.nextSibling);
+                        }
+                        
+                        // Exibe a ficha
+                        fichaMonstro.style.display = "block";
+
+                    } else {
+                        // O JOGADOR FECHOU O CARTÃO: DEVOLVE O MONSTRO AO LUGAR ORIGINAL
+                        var ancora = document.getElementById("ancora-" + idBestiario);
+                        if (ancora) {
+                            painel.insertBefore(btnMonstro, ancora);
+                            painel.insertBefore(fichaMonstro, ancora);
+                        }
+                        
+                        fichaMonstro.style.display = "none";
+                    }
+                }
+            }
+        }
+
+        function abrirBestiario(id) {
+            var elemento = document.getElementById(id);
+            if (!elemento) return;
+            var estavaAberto = (elemento.style.display === "flex");
+            
+            var todos = document.getElementsByClassName("conteudo-bestiario");
+            for (var i = 0; i < todos.length; i++) { 
+                todos[i].style.display = "none"; 
+            }
+            
+            if (!estavaAberto) { 
+                elemento.style.display = "flex"; 
+            }
+        }
+        function filtrarAuto(tipoBuscado, btnClicado) {
+            // 1. Muda a cor do botão selecionado
+            var filtros = document.getElementsByClassName("btn-filtro");
+            for (var i = 0; i < filtros.length; i++) {
+                filtros[i].classList.remove("ativo");
+            }
+            btnClicado.classList.add("ativo");
+
+            // 2. O Feitiço de Leitura (Analisa o texto do livro)
+            var botoesMonstros = document.getElementsByClassName("btn-bestiario");
+            for (var i = 0; i < botoesMonstros.length; i++) {
+                var btn = botoesMonstros[i];
+                var ficha = btn.nextElementSibling; // Pega o conteúdo da ficha
+                
+                // Pega a primeira linha da ficha (onde está o texto em itálico) e passa para minúsculas
+                var textoDescricao = ficha.firstElementChild.innerText.toLowerCase();
+
+                // Fecha a ficha para o visual não bugar
+                ficha.style.display = "none"; 
+
+                // Verifica se a descrição contém a palavra do filtro
+                if (tipoBuscado === 'todos') {
+                    btn.style.display = "block";
+                } else if (textoDescricao.includes(tipoBuscado)) {
+                    btn.style.display = "block";
+                } else {
+                    btn.style.display = "none";
+                }
+            }
+        }
+    
+    </script>
+</body>
+</html>
