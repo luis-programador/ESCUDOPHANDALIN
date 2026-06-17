@@ -1,0 +1,14 @@
+{
+  "name": "Escudo do Mestre: Phandelver",
+  "version": "1.0.0",
+  "manifest_version": 1,
+  "description": "Painel de consulta rápida para o DM",
+  "icon": "icon.png",
+  "action": {
+    "title": "Abrir Escudo",
+    "icon": "icon.png",
+    "popover": "index.html",
+    "width": 800,
+    "height": 600
+  }
+}
