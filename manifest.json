@@ -3,11 +3,11 @@
   "version": "1.0.0",
   "manifest_version": 1,
   "description": "Painel de consulta rápida para o DM",
-  "icon": "icon.png",
+  "icon": "https://luis-programador.github.io/ESCUDOPHANDALIN/icon.png",
   "action": {
     "title": "Abrir Escudo",
-    "icon": "icon.png",
-    "popover": "index.html",
+    "icon": "https://luis-programador.github.io/ESCUDOPHANDALIN/icon.png",
+    "popover": "https://luis-programador.github.io/ESCUDOPHANDALIN/index.html",
     "width": 800,
     "height": 600
   }
